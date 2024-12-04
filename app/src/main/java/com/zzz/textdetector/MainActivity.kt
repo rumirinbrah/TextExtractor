@@ -24,10 +24,10 @@ class MainActivity : ComponentActivity() {
                         contract = ActivityResultContracts.RequestPermission()
                     ) {}
                     if(!isCameraGranted(this)){
+                        //ask for permission
                         SideEffect {
                             permissionLauncher.launch(Manifest.permission.CAMERA)
                         }
-
                     }
                     HomePage()
                 }

@@ -1,3 +1,6 @@
+import com.android.build.api.dsl.AaptOptions
+import com.android.build.api.dsl.AndroidResources
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -39,6 +42,10 @@ android {
     buildFeatures {
         compose = true
     }
+    aaptOptions {
+        noCompress += "tflite"
+    }
+ androidResources
 }
 
 dependencies {
@@ -46,8 +53,10 @@ dependencies {
     //ML-KIT
     implementation(platform(libs.firebase.bom))
     implementation(libs.text.recognition)
+    //implementation("com.google.mlkit:object-detection-custom:17.0.2")
+
+    //COIL
     implementation(libs.coil.compose)
-    //implementation("com.google.firebase:firebase-ml-vision")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

@@ -48,16 +48,15 @@ fun HomePage(
     recognizerViewModel: RecognizerViewModel = RecognizerViewModel(),
 ) {
 
-    val context = LocalContext.current
-    val file = context.getImageFile()
-    val uri = FileProvider.getUriForFile(
-        Objects.requireNonNull(context),
-        context.packageName + ".provider",file
-    )
+    //model
+    //val objectDetector = ObjectDetection.getClient(objectDetectorOptions)
 
+    val context = LocalContext.current
+
+    //img for firebase kit
     var image by remember { mutableStateOf<InputImage?>(null) }
 
-
+    //states
     var currentImage by remember{ mutableStateOf<Uri?>(null) }
     var extractedText by remember{ mutableStateOf<String>("") }
 
@@ -69,6 +68,12 @@ fun HomePage(
         }
     }
 
+    //for cam picker
+    val file = context.getImageFile()
+    val uri = FileProvider.getUriForFile(
+        Objects.requireNonNull(context),
+        context.packageName + ".provider",file
+    )
     val cameraImagePicker = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.TakePicture()
     ) {
@@ -105,11 +110,11 @@ fun HomePage(
                 modifier = Modifier
                     .size(400.dp),
                 model = ImageRequest.Builder(context)
-                    .data(currentImage)
+                    .data(it)
                     .crossfade(true)
                     .build(),
                 contentDescription = null,
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Fit
             )
         }
 
@@ -126,8 +131,8 @@ fun HomePage(
             Text(text, fontSize = 20.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
         }
 
+        //extract if not null
         image?.let {
-
             recognizerViewModel.extractTextFromImage(
                 it,
                 onSuccess = {task->
@@ -137,8 +142,6 @@ fun HomePage(
                     println(exception.printStackTrace())
                 }
             )
-
-
         }
     }
 }

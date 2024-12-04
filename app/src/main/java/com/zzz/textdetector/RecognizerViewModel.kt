@@ -8,6 +8,7 @@ import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 
 class RecognizerViewModel : ViewModel() {
+
     private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
 
     fun extractTextFromImage(image : InputImage, onError : (Exception) ->Unit, onSuccess : (Task<Text>)->Unit ){

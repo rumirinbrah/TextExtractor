@@ -8,6 +8,7 @@ The text extraction is accurate most of the time.
 
 https://github.com/user-attachments/assets/efd4f062-ca68-459e-8bb8-624334b301ac
 
+![Owaru - A Reminder Application](https://github.com/user-attachments/assets/3294fc3e-d7b6-430f-a222-73f937a9a178)
 
 
 ## Features

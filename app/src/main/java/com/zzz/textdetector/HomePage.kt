@@ -37,8 +37,6 @@ import androidx.core.content.FileProvider
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -57,7 +55,6 @@ fun HomePage(
         context.packageName + ".provider",file
     )
 
-    val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
     var image by remember { mutableStateOf<InputImage?>(null) }
 
 
@@ -66,8 +63,8 @@ fun HomePage(
 
     val galleryImagePicker = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia()
-    ) {uri->
-        uri?.let {
+    ) {imageUri->
+        imageUri?.let {
             currentImage = it
         }
     }

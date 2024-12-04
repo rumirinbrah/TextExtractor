@@ -46,7 +46,8 @@ import java.util.Objects
 
 @Composable
 fun HomePage(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    recognizerViewModel: RecognizerViewModel = RecognizerViewModel(),
 ) {
 
     val context = LocalContext.current
@@ -129,17 +130,17 @@ fun HomePage(
         }
 
         image?.let {
-            println("error in result blockw")
-            val result = recognizer.process(it)
-                .addOnSuccessListener {text->
-                    println("Success.....")
-                }
-                .addOnCompleteListener {task->
+
+            recognizerViewModel.extractTextFromImage(
+                it,
+                onSuccess = {task->
                     extractedText = task.result.text
-                }
-                .addOnFailureListener {exception->
+                },
+                onError = {exception->
                     println(exception.printStackTrace())
                 }
+            )
+
 
         }
     }

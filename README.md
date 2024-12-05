@@ -14,6 +14,7 @@ https://github.com/user-attachments/assets/efd4f062-ca68-459e-8bb8-624334b301ac
 ## Features
 * Upload From Gallery
 * Take Pictures From Camera
+* Works Offline
 
 ## Missing Feature
 I tried using Firebase object detection to focus only on LED displays but turns out Firebase's ML kit is only capable of detecting about 5 types of objects.
